@@ -112,7 +112,8 @@ with torch.no_grad():
         images, labels = data
         outputs = net(images)
         _, predicted = torch.max(outputs, 1)
-        c = (predicted == labels).squeeze()
+        # c = (predicted == labels).squeeze()
+        c = (predicted == labels)
         for i in range(4):
             label = labels[i]
             class_correct[label] += c[i].item()
@@ -120,3 +121,4 @@ with torch.no_grad():
 
 for i in range(10):
     print('Accuracy of %5s: %2d %%' % (classes[i], 100 * class_correct[i] / class_total[i]))
+    print(class_correct[i], class_total[i])
